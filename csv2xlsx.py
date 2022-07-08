@@ -18,6 +18,8 @@ from xlsxwriter.workbook import Workbook
 def main(glob_pattern, outdir):
     """A utility for converting English (US) style CSV files into German (EU) style Excel worksheets.
     It replaces ',' as a column separator by ';' and converts the . as a decimal separator to ','
+
+    All files identified by GLOB_PATTERN are converted one by one.
     """
 
     for csvfile in glob(glob_pattern):
