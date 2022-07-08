@@ -1,4 +1,5 @@
 from glob import glob
+from itertools import cycle
 from os import path
 
 import click
@@ -37,9 +38,11 @@ def main(glob_pattern, outdir):
                     c += 1
                 c = 0
                 r += 1
+                print("\r" + next(spinner), end="")
         workbook.close()
-        print(f"converted: {csvfile} -> {xlsxfile}")
+        print(f"\rconverted: {csvfile} -> {xlsxfile}")
 
 
 if __name__ == "__main__":
+    spinner = cycle(["-", "/", "|", "\\"])
     main()
