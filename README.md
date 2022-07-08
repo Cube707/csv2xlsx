@@ -1,3 +1,6 @@
+[![GitHub badge](https://badges.aleen42.com/src/github.svg)](https://github.com/Cube707/csv2xlsx)
+[![Python badge](https://badges.aleen42.com/src/python.svg)](https://python.org)
+
 # csv2xlsx
 
 A utility for converting English (US) style CSV files into German (EU) style Excel worksheets.
