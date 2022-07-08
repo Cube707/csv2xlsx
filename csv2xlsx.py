@@ -1,6 +1,6 @@
 from glob import glob
 from itertools import cycle
-from os import path
+from os import path, makedirs
 
 import click
 from xlsxwriter.workbook import Workbook
@@ -11,7 +11,7 @@ from xlsxwriter.workbook import Workbook
 @click.option(
     "--outdir",
     "-o",
-    type=click.Path(exists=True, file_okay=False),
+    type=click.Path(file_okay=False),
     help="optional output directory",
     default=".",
 )
@@ -24,6 +24,8 @@ def main(glob_pattern, outdir):
     """
 
     for csvfile in glob(glob_pattern):
+        outdir = path.join(path.dirname(csvfile), outdir)
+        makedirs(outdir, exist_ok=True)  # ensure outdir exists
         xlsxfile = path.join(outdir, path.basename(csvfile)[:-4] + ".xlsx")
         workbook = Workbook(xlsxfile)
         worksheet = workbook.add_worksheet()
