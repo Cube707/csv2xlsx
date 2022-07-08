@@ -16,21 +16,21 @@ A virtual environment is recommended, but optional:
 
 1. Set up the venv:
 
-```
-python -m venv .venv
-```
+    ```
+    python -m venv .venv
+    ```
 
 2. Activate it:
 
-```
-.venv\Scripts\activate
-```
+    ```
+    .venv\Scripts\activate
+    ```
 
 3. install the dependencies:
 
-```
-pip install -r requirements.txt
-```
+    ```
+    pip install -r requirements.txt
+    ```
 
 Done!
 
@@ -49,27 +49,68 @@ use the prebuild binary by simply running it:
 csv2xlsx.exe 
 ```
 
-You can pass it a [Glob-pattern](https://www.malikbrowne.com/blog/a-beginners-guide-glob-patterns) to be used to find the files. By default, `*.csv` is
-used.
+Without any options this will format all `.csv` files in the current working directory.
 
-You can use the `--outdir` option to specify an output directory, either relative to the current folder or as an absolute path.
+Additionally you can pass the following options to the scripts to modify its behaviour. The call signature looks like this:
 
-
-## Documentation
-
-You can access this documentation by passing the `--help` option to the script.
-
-```
+```bash
 Usage: csv2xlsx.py [OPTIONS] [GLOB_PATTERN]
-
-  A utility for convernverting englisch (US) style CSV files into German (EU)     
-  style Excel worksheets. It replaces ',' as a column seperator by ';' and        
-  converts the . as a decimal separator to ','
-
-Options:
-  -h, --help              Show this message and exit.
-  -o, --outdir DIRECTORY  optional output directory
 ```
+
+### `GLOB_PATTERN` positional argument
+
+You can pass a glob-pattern to the script to tell it what files to modify. By default, `*.csv` is used, but you can modify it as you need.
+
+Here are some examples and results:
+
+```bash
+# recurse through all subdirectorys as well:
+csv2xlsx.py **/*.csv
+
+> converted: file.csv -> file.xlsx
+> converted: sub/file.csv -> sub/file.xlsx
+```
+
+```bash
+# using an absoloute path:
+csv2xlsx.py /absoloute/path/*.csv
+
+> converted: /absoloute/path/file.csv -> /absoloute/path/file.xlsx
+```
+
+### `--outdir` / `-o` option
+
+You can use the `--outdir` option to specify an output directory, either relative to the current folder or as an absolute path. Directories will be
+created if required
+
+Here are some examples and results:
+
+```bash
+# relative output directory:
+csv2xlsx.py -o out
+
+> converted: file.csv -> out/file.xlsx
+```
+
+```bash
+# recurse through all subdirectories as well:
+csv2xlsx.py -o out **/*.csv
+
+> converted: file.csv -> out/file.xlsx
+> converted: sub/file.csv -> sub/out/file.xlsx
+```
+
+```bash
+# use an absoloute output directory:
+csv2xlsx.py -o /absoloute/output/path/ /absoloute/path/*.csv
+
+> converted: /absoloute/path/file.csv -> /absoloute/output/path/file.xlsx
+```
+
+### `--help` / `-h` option
+
+Displays a help text with a short version of this documentation.
+
 
 # build the binary
 
