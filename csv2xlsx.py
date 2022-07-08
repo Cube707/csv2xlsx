@@ -23,7 +23,7 @@ def main(glob_pattern, outdir):
     """
 
     for csvfile in glob(glob_pattern):
-        xlsxfile = path.join(outdir, csvfile[:-4] + ".xlsx")
+        xlsxfile = path.join(outdir, path.basename(csvfile)[:-4] + ".xlsx")
         workbook = Workbook(xlsxfile)
         worksheet = workbook.add_worksheet()
         r, c = 0, 0
