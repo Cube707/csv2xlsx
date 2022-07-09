@@ -37,12 +37,13 @@ def main(glob_pattern, outdir, separator):
         xlsxfile = path.join(outdir, path.basename(csvfile)[:-4] + ".xlsx")
         workbook = Workbook(xlsxfile)
         worksheet = workbook.add_worksheet()
-        r, c = 0, 0
+        r, c = 0, -1
         with open(csvfile, "rt", encoding="utf8") as fp:
 
             for line in fp.readlines():
                 line = line.strip("\n")
                 for token in line.split(separator):
+                    c += 1
                     if not token:
                         continue
                     if token.startswith('"'):
@@ -55,8 +56,7 @@ def main(glob_pattern, outdir, separator):
                             worksheet.write_number(r, c, float(token))
                         except ValueError:  # Non-numbers that are not escaped with "
                             worksheet.write(r, c, token)
-                    c += 1
-                c = 0
+                c = -1
                 r += 1
                 print("\r" + next(spinner), end="")
         workbook.close()
