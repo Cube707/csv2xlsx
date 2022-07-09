@@ -5,7 +5,7 @@
 
 A utility for converting English (US) style CSV files into German (EU) style Excel worksheets.
 
-It replaces `,` as a column separator by `;` and converts the `.` as a decimal separator to `,`
+It converts the `.` as a decimal separator to `,`. Tokens wrapped in `"` are treated as strings and not converted.
 
 
 ## install dependencies
@@ -105,6 +105,16 @@ csv2xlsx.py -o out **/*.csv
 csv2xlsx.py -o /absoloute/output/path/ /absoloute/path/*.csv
 
 > converted: /absoloute/path/file.csv -> /absoloute/output/path/file.xlsx
+```
+
+### `--separator` / `-s` option
+
+Defines the separator used in the CSV files. Defaults to `,`, but can be set to any string.
+
+Here is a examples:
+
+```bash
+csv2xlsx.py -s ; *.csv
 ```
 
 ### `--help` / `-h` option

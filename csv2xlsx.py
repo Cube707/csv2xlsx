@@ -15,10 +15,17 @@ from xlsxwriter.workbook import Workbook
     help="optional output directory",
     default=".",
 )
+@click.option(
+    "--separator",
+    "-s",
+    type=str,
+    help="separator of the CSV file, defaults to ','",
+    default=",",
+)
 @click.argument("glob_pattern", default="*.csv", nargs=1)
-def main(glob_pattern, outdir):
+def main(glob_pattern, outdir, separator):
     """A utility for converting English (US) style CSV files into German (EU) style Excel worksheets.
-    It replaces ',' as a column separator by ';' and converts the . as a decimal separator to ','
+    It converts the . as a decimal separator to ','. Tokens wrapped in "" are treated as strings and not converted.
 
     All files identified by GLOB_PATTERN are converted one by one.
     """
@@ -33,7 +40,7 @@ def main(glob_pattern, outdir):
         with open(csvfile, "rt", encoding="utf8") as fp:
 
             for line in fp.readlines():
-                for token in line.split(","):
+                for token in line.split(separator):
                     if not token.startswith('"'):
                         token = token.replace(".", ",")
                     worksheet.write(r, c, token)
