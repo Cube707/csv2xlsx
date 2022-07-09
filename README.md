@@ -5,7 +5,7 @@
 
 A utility for converting English (US) style CSV files into German (EU) style Excel worksheets.
 
-It converts the `.` as a decimal separator to `,`. Tokens wrapped in `"` are treated as strings and not converted.
+It converts the `.` as a decimal separator to `,`. Tokens wrapped in `"` are treated as strings and not converted, but get their `"` striped.
 
 
 ## install dependencies

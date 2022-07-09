@@ -25,7 +25,8 @@ from xlsxwriter.workbook import Workbook
 @click.argument("glob_pattern", default="*.csv", nargs=1)
 def main(glob_pattern, outdir, separator):
     """A utility for converting English (US) style CSV files into German (EU) style Excel worksheets.
-    It converts the . as a decimal separator to ','. Tokens wrapped in "" are treated as strings and not converted.
+    It converts the . as a decimal separator to ','. Tokens wrapped in "" are treated as strings and not converted,
+    but get their " striped.
 
     All files identified by GLOB_PATTERN are converted one by one.
     """
@@ -40,10 +41,20 @@ def main(glob_pattern, outdir, separator):
         with open(csvfile, "rt", encoding="utf8") as fp:
 
             for line in fp.readlines():
+                line = line.strip("\n")
                 for token in line.split(separator):
-                    if not token.startswith('"'):
-                        token = token.replace(".", ",")
-                    worksheet.write(r, c, token)
+                    if not token:
+                        continue
+                    if token.startswith('"'):
+                        token = token.strip('"')
+                        worksheet.write(r, c, token)
+                    else:
+                        if token == "nan":
+                            continue
+                        try:
+                            worksheet.write_number(r, c, float(token))
+                        except ValueError:  # Non-numbers that are not escaped with "
+                            worksheet.write(r, c, token)
                     c += 1
                 c = 0
                 r += 1
