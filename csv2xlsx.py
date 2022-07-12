@@ -3,7 +3,7 @@ from itertools import cycle
 from os import path, makedirs
 
 import click
-from xlsxwriter.workbook import Workbook
+from xlsxwriter.workbook import Workbook, FileCreateError
 
 
 @click.command()
@@ -60,8 +60,12 @@ def main(glob_pattern, outdir, separator):
                 c = -1
                 r += 1
                 print("\r" + next(spinner), end="")
-        workbook.close()
-        print(f"\rconverted: {csvfile} -> {xlsxfile}")
+        try:
+            workbook.close()
+            print(f"\rconverted: {csvfile} -> {xlsxfile}")
+        except FileCreateError as e:
+            print(f"\rfailed: {csvfile}\tyou probably have the file already open?")
+            print(f"\t{e}")
 
 
 if __name__ == "__main__":
