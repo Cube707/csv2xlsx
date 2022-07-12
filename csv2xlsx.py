@@ -31,6 +31,8 @@ def main(glob_pattern, outdir, separator):
     All files identified by GLOB_PATTERN are converted one by one.
     """
 
+    spinner = cycle(["-", "/", "|", "\\"])  # a spinner to dislay "work in progress"
+
     for csvfile in glob(glob_pattern):
         outdir = path.join(path.dirname(csvfile), outdir)
         makedirs(outdir, exist_ok=True)  # ensure outdir exists
@@ -69,5 +71,4 @@ def main(glob_pattern, outdir, separator):
 
 
 if __name__ == "__main__":
-    spinner = cycle(["-", "/", "|", "\\"])
     main()
