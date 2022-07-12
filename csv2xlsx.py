@@ -44,6 +44,7 @@ def main(glob_pattern, outdir, separator):
                 line = line.strip("\n")
                 for token in line.split(separator):
                     c += 1
+                    token = token.strip(" \t")
                     if not token:
                         continue
                     if token.startswith('"'):
