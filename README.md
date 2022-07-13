@@ -1,5 +1,6 @@
-[![GitHub badge](https://badges.aleen42.com/src/github.svg)](https://github.com/Cube707/csv2xlsx)
-[![Python badge](https://badges.aleen42.com/src/python.svg)](https://python.org)
+[![GitHub badge](https://badges.aleen42.com/src/github_flat_square.svg)](https://github.com/Cube707/csv2xlsx)
+[![Python badge](https://badges.aleen42.com/src/python_flat_square.svg)](https://python.org)
+[![Terminal badge](https://badges.aleen42.com/src/cli_flat_square.svg)](https://www.techtarget.com/searchwindowsserver/definition/command-line-interface-CLI)
 
 # csv2xlsx
 
