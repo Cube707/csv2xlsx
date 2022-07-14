@@ -65,6 +65,13 @@ You can pass a glob-pattern to the script to tell it what files to modify. By de
 Here are some examples and results:
 
 ```bash
+# same as with default settings:
+csv2xlsx.py *.csv
+
+> converted: file.csv -> file.xlsx
+```
+
+```bash
 # recurse through all subdirectorys as well:
 csv2xlsx.py **/*.csv
 
@@ -115,7 +122,7 @@ Defines the separator used in the CSV files. Defaults to `,`, but can be set to 
 Here is a examples:
 
 ```bash
-csv2xlsx.py -s ; *.csv
+csv2xlsx.py -s ";" *.csv
 ```
 
 ### `--help` / `-h` option
