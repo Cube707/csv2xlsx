@@ -137,3 +137,5 @@ by using pyinstaller:
 ```
 pyinstaller -F -p .venv/Lib/site-packages csv2xlsx.py
 ```
+
+This will produce the windows binary in the `dist/` subfolder.
